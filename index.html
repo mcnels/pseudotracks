@@ -1,14 +1,120 @@
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
-<html> <head>
-<title>pseudo-TRACKS</title>
-</head>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>pseudo-TRACKS</title>
+  <link rel="stylesheet" href="ptracks.css" />
 
-<body>
-  <h1><center>pseudo-TRACKS</center></h1>
-<p>
-<hr>
-<p>
-<center>[Login fields go here]</center>    
-<p>
-<hr>
-</body> </html>
+  <script type="text/javascript">
+
+    /**
+     * Handles the sign in button press.
+     */
+    function toggleSignIn() {
+      if (firebase.auth().currentUser) {
+        // [START signout]
+        firebase.auth().signOut();
+        // [END signout]
+      } else {
+        var email = document.getElementById('username').value;
+        var password = document.getElementById('password').value;
+        if (email.length < 4) {
+          alert('Please enter an email address.');
+          return;
+        }
+        if (password.length < 4) {
+          alert('Please enter a password.');
+          return;
+        }
+        // Sign in with email and pass.
+        // [START authwithemail]
+        firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+          // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          // [START_EXCLUDE]
+          if (errorCode === 'auth/wrong-password') {
+            alert('Wrong password.');
+          } else {
+            alert(errorMessage);
+          }
+          console.log(error);
+          document.getElementById('quickstart-sign-in').disabled = false;
+          // [END_EXCLUDE]
+        });
+        // [END authwithemail]
+      }
+      document.getElementById('quickstart-sign-in').disabled = true;
+    }
+  </script>
+</head>
+<body id="cas">
+  <div id="container">
+    <header>
+        <a id="logo" href="http://www.fit.edu" title="go to Florida Tech home page">Florida Tech</a>
+    </header>
+
+    <div id="content">
+      <div class="box" id="login">
+          <form id="fm1" action="/cas/login" method="post">
+
+              <h2>Enter your Username and Password</h2>
+
+              <section class="row">
+                  <label for="username"><span class="accesskey">U</span>sername:</label>
+                      <input id="username" name="username" class="required" tabindex="1" accesskey="u" type="text" value="" size="25" autocomplete="off"/>
+              </section>
+
+              <section class="row">
+                  <label for="password"><span class="accesskey">P</span>assword:</label>
+                  <input id="password" name="password" class="required" tabindex="2" accesskey="p" type="password" value="" size="25" autocomplete="off"/>
+                  <span id="capslock-on" style="display:none;"><p><img src="images/warning.png" valign="top"> CAPSLOCK key is turned on!</p></span>
+              </section>
+
+              <section class="row btn-row">
+                  <!-- <input type="hidden" name="lt" value="LT-1502248-NgQihnXQA7s4tmO7c7WgtH7qzkVFuG-cas4-m1.fit.edu" /> -->
+                  <!-- <input type="hidden" name="execution" value="6f7d3dee-5173-4cf2-9aa6-f1df952f8115_AAAAIgAAABAKKg1D0AgwzCNP94Q6C86XAAAABmFlczEyODAo9+SrTss+76+NinJFWNx896qAx/VztUjJDJ/MxTfTnYcB0m8zz5AtRf4iRhlSPX/sqKOwZbt1/jZKW69FuhzJVaUdjZ2Ub5uM2/jJTUybbk/RXx2gpT2k0W5IfSlnWIlumuUrE63nIiQhErnEI476Z64SI/r4NREJuu8BcWVPUHXCkvR6xeOAgG5p5hDalwXKiznbGRQb95VswIpmFrotWmyhR6IA1z+DSHbPGDskKhZOoHWROquL3J3edBnh7awjRXoz5R358DTuPRuALDS0ctedChEK4m6bkSjzmZajAgc0KHb7qdD4PmluWGp5otkmcwevwt9TB+AU6gPk3pjn9WzVKhRhRpILmDjZpb96q1al9EktvK+24QBR2kW6Y+RPXhOj2D6e89KPoOoAa6fLtUnf0jEnTD9GccO6C+w2AGWiDMLC+PSQc2X47fvVbIYdpFvjmOIiK9StIVLc1FRnGUvxe39k8ddsYf+btl5g34hNomT8gSt5U8Ko40O+qfpknZlBo6DAgJdjVN0Hbqbb/vdaCYJaaEW5QRqrpjaRmNRFN0dTO5qiD6HGN1FHS39UjmOK2+pqSzS5Uvl5pxuqBVReET5Y5qs8KbzqcJJM7cDlbA3E98AEef6ptQZfpjsCrbikBnwnleCSMqIaEHlOKYskpcAOGtDwk28YSM49KLMxKvHyGOYpgamn2l7TYpV/I9sVYYozoo+YsRXIu5sP40GfxIwNay25xDKRMyLgqSO1fJMNshs4lj4BCmzSkrp71MeC9kz0uoIaV6HSREzxIC7HW/ABeBSpSqGqBMZ80sPFne64l+aqE8cEyhWYId/oBaHG2vypprVp19uK2ytTEUP2gAGcmaH6458gr+VRJ4zdvcjoaD+Rzv7L6yWuR0s4g8rnaSKSXqkmG+cgA9Iqet88qc36+MBwronEAMNqZ6R/h+/ldzD/w3wIgMTCSIxg/lNP242YCZVPrv1RtkbuGDoc/I4bYYVsWPwuJX/r" /> -->
+                  <!-- <input type="hidden" name="_eventId" value="submit" /> -->
+                  <input class="btn-submit" id="quickstart-sign-in" name="submit" accesskey="l" value="LOGIN" tabindex="6" type="submit" />
+                  <input class="btn-reset" name="reset" accesskey="c" value="CLEAR" tabindex="7" type="reset" />
+              </section>
+              <div>
+            </div>
+          </form>
+      </div>
+
+      <div id="sidebar">
+          <div class="sidebar-content">
+              <p><h2>What is pseudo-TRACKS?</h2><p>pseudo-TRACKS is the authentication system used to access your Form Buster account. Please report problems to the Form Buster team <a href="http://formbuster.me/">online</a>.</p>
+              <p>For security reasons, please Log Out and Exit your web browser when you are done accessing services that require authentication!</p></p>
+              <p>Firebase sign-in status: <span id="quickstart-sign-in-status">Unknown</span></p>
+          </div>
+      </div>
+    </div> <!-- END #content -->
+
+    <footer>
+        <div id="copyright">
+            <p>Copyright &copy; 2018 pseudo-TRACKS, Inc. All rights reserved.</p>
+        </div>
+    </footer>
+  </div> <!-- END #container -->
+
+  <script src="https://www.gstatic.com/firebasejs/5.5.3/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyAWosl7w3NfRpAYL-j1XWLDZujl8GpO-KA",
+      authDomain: "pseudotracks-bb89e.firebaseapp.com",
+      databaseURL: "https://pseudotracks-bb89e.firebaseio.com",
+      projectId: "pseudotracks-bb89e",
+      storageBucket: "pseudotracks-bb89e.appspot.com",
+      messagingSenderId: "369787432909"
+    };
+    firebase.initializeApp(config);
+  </script>
+  <script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-auth.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/headjs/1.0.3/head.min.js"></script>
+  <script type="text/javascript" src="ptracks.js"></script>
+</body>
+</html>

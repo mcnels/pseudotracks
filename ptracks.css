@@ -58,7 +58,7 @@ body { font-family: Verdana, sans-serif; font-size: 11px; line-height: 1.4em; ba
 }
 
 body {
-    background: #333; /* Old browsers */
+    background: #b05d54; /* Old browsers */
 }
 
 a:link, a:visited {
@@ -80,14 +80,22 @@ header {
 
 #logo {
     display: block;
-    background: url(images/logo.png) no-repeat;
+    background: url(logo.png) no-repeat;
     background-size: auto 100%;
     text-indent: -999em;
     float: left;
-    height: 60px;
-    width: 80%;
+    /*height: 60px;*/
+    height: 100px;
+    width: 100%;
     margin-right: 40px;
     border: 0px;
+}
+
+#header {
+    display: block;
+    font-size: 40px;
+    font-family: Impact;
+    color: ghostwhite;
 }
 
 #content {

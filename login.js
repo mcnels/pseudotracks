@@ -30,7 +30,7 @@
         signInFlow: 'popup',
         signInSuccessUrl: 'http://formbuster.me/src/studash.html',
         signInOptions: [
-          firebase.auth.EmailAuthProvider.PROVIDER_ID
+          app_firebase.auth.EmailAuthProvider.PROVIDER_ID
         ],
         credentialHelper: firebaseui.auth.CredentialHelper.NONE
       };

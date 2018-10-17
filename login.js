@@ -1,17 +1,17 @@
 (function() {
-  app_firebase.auth().onAuthStateChanged(function(user) {
-        if (user) {
-          // User is signed in.
-          location.replace("http://formbuster.me/src/studash.html");
-        }else{
-            init();
+//   app_firebase.auth().onAuthStateChanged(function(user) {
+//         if (user) {
+//           // User is signed in.
+//           location.replace("http://formbuster.me/src/studash.html");
+//         }else{
+//             init();
             
-        }
-      });
+//         }
+//       });
   
-  function init(){
+  //function init(){
       // Initialize the FirebaseUI Widget using Firebase.
-      var ui = new firebaseui.auth.AuthUI(app_firebase.auth());
+      var ui = new firebaseui.auth.AuthUI(firebase.auth());
       var uiConfig = {
         callbacks: {
           signInSuccessWithAuthResult: function(authResult, redirectUrl) {
@@ -30,12 +30,11 @@
         signInFlow: 'popup',
         signInSuccessUrl: 'http://formbuster.me/src/studash.html',
         signInOptions: [
-          app_firebase.auth.EmailAuthProvider.PROVIDER_ID
+          firebase.auth.EmailAuthProvider.PROVIDER_ID
         ],
         credentialHelper: firebaseui.auth.CredentialHelper.NONE
       };
 
       // The start method will wait until the DOM is loaded.
       ui.start('#firebaseui-auth-container', uiConfig);
-  }
 })()
